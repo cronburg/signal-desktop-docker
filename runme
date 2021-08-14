@@ -1,0 +1,11 @@
+#!/bin/bash
+
+docker run \
+  -e DISPLAY \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  --ulimit core=-1 \
+  --security-opt seccomp=unconfined \
+  -v `pwd`/config:/home/signal/.config \
+  --user=$(id --user):$(id --group) \
+  -t -i cronburg/signal-desktop:latest "$@"
+
